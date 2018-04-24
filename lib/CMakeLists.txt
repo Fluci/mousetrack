@@ -55,16 +55,20 @@ find_package( Boost COMPONENTS
     unit_test_framework
     REQUIRED )
 ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
+message("Boost version: " ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}  " (" ${Boost_VERSION} ")")
 
 
 find_package( OpenCV REQUIRED )
+message("OpenCV Version: " ${OpenCV_VERSION})
 
 find_package( Eigen3 REQUIRED )
 include_directories(${EIGEN3_INCLUDE_DIR})
+message("Eigen version: " ${EIGEN3_VERSION})
 
 find_package( PNG REQUIRED )
 add_definitions(${PNG_DEFINITIONS})
 include_directories(${PNG_INCLUDE_DIRS})
+message("PNG version: " ${PNG_VERSION_STRING})
 
 target_link_libraries(libmousetrack
     ${OpenCV_LIBS}
@@ -83,3 +87,4 @@ target_link_libraries(tests
 # but this way, IDE's also show header files in their project overviews
 file(GLOB_RECURSE header_files "*.h")
 add_custom_target(headers SOURCES ${header_files})
+
