@@ -7,6 +7,7 @@
 #include "cubic_neighborhood.h"
 #include "spatial_oracle.h"
 #include <Eigen/Core>
+#include <Eigen/Dense>
 #include <boost/log/trivial.hpp>
 
 namespace std {
