@@ -32,7 +32,7 @@ Feel free to add or adjust entries on your own experience.
 - libpng 1.2 and 1.6 are known to work
 - boost 1.56 and 1.58 are known to work
 - OpenCV 3.3 is known to work
-- Eigen 2.91 is known to work
+- Eigen 3.3.0 is known to work
 
 ## Build project
 
