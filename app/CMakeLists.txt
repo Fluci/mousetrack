@@ -28,7 +28,7 @@ set(test_files
 
 # find and import dependencies
 
-find_package( Eigen3 REQUIRED 3.2.92)
+find_package( Eigen3 3.2.92 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 message("Eigen version: " ${EIGEN3_VERSION})
 
