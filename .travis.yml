@@ -32,7 +32,7 @@ before_install:
 script:
 - mkdir -p build
 - cd build
-- CC=gcc-4.9 CXX=g++-4.9 cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
+- CC=gcc-4.9 CXX=g++-4.9 cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DENABLE_GUI=NO ..
 - make
 - ../run_tests.sh
 - ./app/mousetrack
