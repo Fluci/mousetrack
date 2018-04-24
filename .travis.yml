@@ -23,6 +23,7 @@ before_install:
  - eval "${MATRIX_EVAL}" # Does not work for the moment
  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; if ! [[ `brew ls --versions boost` ]]; then brew install boost; fi; fi
  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then if ! [[ `brew ls --versions gcc` ]]; then brew install gcc; fi; fi
+ - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update && sudo apt-get upgrade && echo yey!; fi
  - gcc --version
  - g++ --version
  - clang --version
