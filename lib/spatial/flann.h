@@ -72,7 +72,7 @@ public:
     params.cores = 0;
     _index->knnSearch(query, indices, dists, k, params);
 
-    return std::move(indices);
+    return indices;
   }
 
   virtual std::vector<std::vector<PointIndex>>
@@ -90,7 +90,7 @@ public:
     params.cores = 0;
     _index->radiusSearch(query, indices, dists, r, params);
 
-    return std::move(indices);
+    return indices;
   }
 };
 

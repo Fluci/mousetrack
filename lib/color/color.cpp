@@ -7,7 +7,9 @@
 
 #include "color.h"
 #include <boost/log/trivial.hpp>
-#include <opencv2/contrib/contrib.hpp>
+#include <opencv2/core.hpp>
+//#include <opencv2/contrib/contrib.hpp>
+#include <opencv2/imgproc.hpp>
 #include <time.h>
 
 using namespace cv;
@@ -16,7 +18,7 @@ namespace MouseTrack {
 
 /// Will return a list of N rgb values that are as different from each other as
 /// possible
-std::vector<std::vector<double>> GenerateNColors(int n) {
+std::vector<std::vector<unsigned char>> GenerateNColors(int n) {
   int nmod = std::min(256, n);
   std::vector<unsigned char> intensity;
   if (n == 1) {
@@ -33,7 +35,7 @@ std::vector<std::vector<double>> GenerateNColors(int n) {
   // Dummy output image
   Mat coloured;
   applyColorMap(dummy, coloured, COLORMAP_JET);
-  std::vector<std::vector<double>> colours;
+  std::vector<std::vector<unsigned char>> colours;
   for (size_t i = 0; i < intensity.size(); ++i) {
     colours.push_back({coloured.at<Vec3b>(0, i)[2], coloured.at<Vec3b>(0, i)[1],
                        coloured.at<Vec3b>(0, i)[0]});
@@ -46,7 +48,7 @@ std::vector<std::vector<double>> GenerateNColors(int n) {
 
 /// Will return a random colour with the format [r, g, b]
 /// Note: currently limited to 64 different colours
-std::vector<double> GenerateRandomColor() {
+std::vector<unsigned char> GenerateRandomColor() {
   // Random variable
   int i = rand() % 64;
   // Now multiply to get the intensity
@@ -63,7 +65,7 @@ std::vector<double> GenerateRandomColor() {
   auto green = coloured.at<Vec3b>(0, 0)[1];
   auto blue = coloured.at<Vec3b>(0, 0)[0];
 
-  return std::vector<double>{red, green, blue};
+  return std::vector<unsigned char>{red, green, blue};
 }
 
 } // namespace MouseTrack

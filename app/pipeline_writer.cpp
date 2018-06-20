@@ -414,7 +414,15 @@ void PipelineWriter::newClusterChains(
 }
 
 std::vector<std::vector<double>> PipelineWriter::nColors(int n) const {
-  auto cols = GenerateNColors(n);
+  auto intCols = GenerateNColors(n);
+  std::vector<std::vector<double>> cols{intCols.size()};
+  for(size_t i = 0; i < cols.size(); ++i){
+    cols[i].resize(intCols[i].size());
+    for(size_t j = 0; j < cols[i].size(); ++j){
+      // TODO: division by 255?
+      cols[i][j] = intCols[i][j]/255.0;
+    }
+  }
   auto min = std::min(cols.size(), _forcedNColors.size());
   std::copy(_forcedNColors.begin(), _forcedNColors.begin() + min, cols.begin());
   return cols;

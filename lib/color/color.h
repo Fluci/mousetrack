@@ -12,8 +12,8 @@
 
 namespace MouseTrack {
 
-std::vector<std::vector<double>> GenerateNColors(int n);
+std::vector<std::vector<unsigned char>> GenerateNColors(int n);
 
-std::vector<double> GenerateRandomColor();
+std::vector<unsigned char> GenerateRandomColor();
 
 } // namespace MouseTrack

@@ -8,6 +8,7 @@
 #include "generic/disparity_map.h"
 #include "generic/types.h"
 #include <Eigen/Core>
+#include <vector>
 
 namespace MouseTrack {
 

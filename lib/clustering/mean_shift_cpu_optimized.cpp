@@ -9,6 +9,7 @@
 #include <Eigen/Dense>
 #include <boost/log/trivial.hpp>
 #include <iostream>
+#include <numeric> 
 
 namespace MouseTrack {
 

@@ -34,8 +34,6 @@ BOOST_AUTO_TEST_CASE(cubic_neighborhood_dists) {
 }
 
 BOOST_AUTO_TEST_CASE(cubic_neighborhood_constructor_tests) {
-  CubicNeighborhood<-1> neighDefault();
-
   CubicNeighborhood<-1> neigh00(0, 1);
   CubicNeighborhood<-1> neigh01(1, 1);
   CubicNeighborhood<-1> neigh02(2, 2);
