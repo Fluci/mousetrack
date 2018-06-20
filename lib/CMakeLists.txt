@@ -85,19 +85,23 @@ ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 if(ENABLE_FLANN)
     find_package( Flann REQUIRED )
     add_definitions(-DFLANN_FOUND)
+    message("FLANN found: " ${FLANN_FOUND})
 else(ENABLE_FLANN)
     set(test_files_flann "")
     set(source_files_flann "")
 endif(ENABLE_FLANN)
 
 find_package( OpenCV REQUIRED )
+message("OpenCV found: " ${OpenCV_FOUND})
 
 find_package( Eigen3 REQUIRED )
 include_directories(${EIGEN3_INCLUDE_DIR})
+message("Eigen: " ${EIGEN3_VERSION})
 
 find_package( PNG REQUIRED )
 add_definitions(${PNG_DEFINITIONS})
 include_directories(${PNG_INCLUDE_DIRS})
+message("PNG: " ${PNG_VERSION_STRING})
 
 target_link_libraries(libmousetrack
     ${OpenCV_LIBS}

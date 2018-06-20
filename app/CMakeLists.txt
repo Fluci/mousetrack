@@ -41,6 +41,7 @@ set(test_files
 
 find_package( Eigen3 REQUIRED )
 include_directories(${EIGEN3_INCLUDE_DIR})
+message("Eigen: " ${EIGEN3_VERSION})
 
 find_package( Boost COMPONENTS
     system
@@ -61,6 +62,7 @@ if(ENABLE_GUI)
     Qt5::Widgets
     )
   add_definitions(-DENABLE_GUI)
+  message("Qt5::Widgets: " ${Qt5Widgets_VERSION})
 else(ENABLE_GUI)
     # reset gui sources
     set(gui_source_files "")
