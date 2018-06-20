@@ -18,19 +18,19 @@ void GUIObserver::pipelineTerminated() {
 }
 
 void GUIObserver::newClusterChains(
-    std::shared_ptr<const std::vector<ClusterChain>> chains) {
+    std::shared_ptr<const std::vector<ClusterChain>>) {
   // empty
 }
 
-void GUIObserver::frameStart(FrameNumber frame) {
+void GUIObserver::frameStart(FrameNumber) {
   // empty
 }
 
-void GUIObserver::frameEnd(FrameNumber frame) {
+void GUIObserver::frameEnd(FrameNumber) {
   // empty
 }
 
-void GUIObserver::startFrameWindow(FrameNumber f) {
+void GUIObserver::startFrameWindow(FrameNumber) {
   // empty
 }
 
@@ -40,69 +40,69 @@ void GUIObserver::newFrameWindow(FrameNumber f,
   _window->setFrameWindow(window);
 }
 
-void GUIObserver::startFrameWindowFiltering(FrameIndex f) {
+void GUIObserver::startFrameWindowFiltering(FrameNumber) {
   // empty
 }
 
 void GUIObserver::newFilteredFrameWindow(
-    FrameIndex f, std::shared_ptr<const FrameWindow> window) {
+    FrameNumber, std::shared_ptr<const FrameWindow>) {
   // empty
 }
 
-void GUIObserver::startRegistration(FrameIndex f) {
+void GUIObserver::startRegistration(FrameNumber) {
   // empty
 }
 
-void GUIObserver::newRawPointCloud(FrameNumber f,
-                                   std::shared_ptr<const PointCloud> cloud) {
+void GUIObserver::newRawPointCloud(FrameNumber,
+                                   std::shared_ptr<const PointCloud>) {
   // empty
 }
 
-void GUIObserver::startPointCloudFiltering(FrameNumber f) {
+void GUIObserver::startPointCloudFiltering(FrameNumber) {
   // empty
 }
 
 void GUIObserver::newFilteredPointCloud(
-    FrameNumber f, std::shared_ptr<const PointCloud> cloud) {
+    FrameNumber, std::shared_ptr<const PointCloud>) {
   // empty
 }
 
-void GUIObserver::startClustering(FrameNumber f) {
+void GUIObserver::startClustering(FrameNumber) {
   // empty
 }
 
 void GUIObserver::newClusters(
-    FrameNumber f, std::shared_ptr<const std::vector<Cluster>> cluster) {
+    FrameNumber, std::shared_ptr<const std::vector<Cluster>>) {
   // empty
 }
 
-void GUIObserver::startDescripting(FrameNumber f) {
+void GUIObserver::startDescripting(FrameNumber) {
   // empty
 }
 
 void GUIObserver::newDescriptors(
-    FrameNumber f,
+    FrameNumber,
     std::shared_ptr<const std::vector<std::shared_ptr<const ClusterDescriptor>>>
-        descriptors) {
+    ) {
   // empty
 }
 
-void GUIObserver::startMatching(FrameNumber f) {
+void GUIObserver::startMatching(FrameNumber) {
   // empty
 }
 
-void GUIObserver::newMatches(FrameNumber f,
-                             std::shared_ptr<const std::vector<long>> matches) {
+void GUIObserver::newMatches(FrameNumber,
+                             std::shared_ptr<const std::vector<long>>) {
   // empty
 }
 
-void GUIObserver::startControlPoints(FrameNumber f) {
+void GUIObserver::startControlPoints(FrameNumber) {
   // empty
 }
 
 void GUIObserver::newControlPoints(
-    FrameNumber f,
-    std::shared_ptr<const std::vector<Eigen::Vector3d>> controlPoints) {
+    FrameNumber,
+    std::shared_ptr<const std::vector<Eigen::Vector3d>>) {
   // empty
 }
 

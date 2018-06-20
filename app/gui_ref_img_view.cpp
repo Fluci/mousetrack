@@ -24,13 +24,13 @@ void GUIRefImgView::draw(std::shared_ptr<const FrameWindow> f) {
     BOOST_LOG_TRIVIAL(warning) << "Passed empty Frame Window to GUI";
     return;
   }
-  const Picture &pic = f->frames()[0].referencePicture;
+  const PictureD &pic = f->frames()[0].referencePicture;
   QImage image(pic.cols(), pic.rows(), QImage::Format_Grayscale8);
 
   BOOST_LOG_TRIVIAL(debug) << "image width to display: " << image.width();
 
-  for (size_t x = 0; x < pic.cols(); x++) {
-    for (size_t y = 0; y < pic.rows(); y++) {
+  for (int x = 0; x < pic.cols(); x++) {
+    for (int y = 0; y < pic.rows(); y++) {
       int i = 255 * pic(y, x);
       image.setPixel(pic.cols() - x - 1, y, qRgb(i, i, i));
     }

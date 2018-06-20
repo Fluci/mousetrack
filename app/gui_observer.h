@@ -36,11 +36,11 @@ public:
     void startFrameWindow     (FrameNumber f);
     void newFrameWindow       (FrameNumber f, std::shared_ptr<const FrameWindow> window);
 
-    void startFrameWindowFiltering(FrameIndex f);
-    void newFilteredFrameWindow(FrameIndex f, std::shared_ptr<const FrameWindow> window);
+    void startFrameWindowFiltering(FrameNumber f);
+    void newFilteredFrameWindow(FrameNumber f, std::shared_ptr<const FrameWindow> window);
 
-    void startRegistration    (FrameIndex f);
-    void newRawPointCloud     (FrameIndex f, std::shared_ptr<const PointCloud> cloud);
+    void startRegistration    (FrameNumber f);
+    void newRawPointCloud     (FrameNumber f, std::shared_ptr<const PointCloud> cloud);
 
     void startPointCloudFiltering(FrameNumber f);
     void newFilteredPointCloud(FrameNumber f, std::shared_ptr<const PointCloud> cloud);
