@@ -4,7 +4,6 @@
 ///
 
 #include "main_window.h"
-#include "gui_observer.h"
 
 #include <QString>
 

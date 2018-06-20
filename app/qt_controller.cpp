@@ -5,8 +5,6 @@
 
 #include "qt_controller.h"
 
-#include "gui_observer.h"
-#include "main_window.h"
 #include <QApplication>
 #include <QPushButton>
 #include <boost/log/trivial.hpp>
@@ -18,12 +16,10 @@ int QtController::main(int argc, char *argv[], op::variables_map &) {
   // set up application
   QApplication app(argc, argv);
   // show a button in a window
-  MainWindow window;
 
-  std::unique_ptr<GUIObserver> observer(new GUIObserver(&window));
-  pipeline().addObserver(observer.get());
+  pipeline().addObserver(this);
 
-  window.show();
+  _window.show();
   // start pipeline
   pipeline().start();
 
@@ -33,6 +29,12 @@ int QtController::main(int argc, char *argv[], op::variables_map &) {
   pipeline().join();
 
   return returnCode;
+}
+
+void QtController::newFrameWindow(FrameNumber f,
+                                  std::shared_ptr<const FrameWindow> window) {
+  _window.setFrameNumber(f);
+  _window.setFrameWindow(window);
 }
 
 } // namespace MouseTrack

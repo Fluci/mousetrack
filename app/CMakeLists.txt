@@ -2,6 +2,7 @@
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 #Instruct CMake to run meta object compiler automatically when needed
+# Needed for Qt Windows???
 set(CMAKE_AUTOMOC ON)
 
 # list here all source files appart from main
@@ -22,7 +23,6 @@ set(source_files
 set(gui_source_files
         qt_controller.cpp
         main_window.cpp
-        gui_observer.cpp
         gui_ref_img_view.cpp
         )
 
