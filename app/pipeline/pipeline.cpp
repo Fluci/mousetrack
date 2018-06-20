@@ -327,6 +327,14 @@ void Pipeline::processFrame(FrameNumber f) {
     }
   }
 
+  forallObservers(
+      [=](PipelineObserver *o) { o->newPointCloud(f, pointCloud); });
+
+  if (terminateEarly()) {
+    forallObservers([=](PipelineObserver *o) { o->frameEnd(f); });
+    return;
+  }
+
   // cluster the point cloud
   if (_clustering == nullptr) {
     BOOST_LOG_TRIVIAL(info)

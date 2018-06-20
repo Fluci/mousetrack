@@ -63,7 +63,10 @@ void PipelineObserver::newFilteredPointCloud(
     FrameNumber, std::shared_ptr<const PointCloud>) {
   // empty
 }
-
+void PipelineObserver::newPointCloud(FrameNumber,
+                                     std::shared_ptr<const PointCloud>) {
+  // empty
+}
 void PipelineObserver::startClustering(FrameNumber) {
   // empty
 }

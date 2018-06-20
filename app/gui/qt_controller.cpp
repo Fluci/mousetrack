@@ -38,4 +38,14 @@ void QtController::newFrameWindow(FrameNumber f,
   _window->setFrameWindow(window);
 }
 
+void QtController::newPointCloud(FrameNumber,
+                                 std::shared_ptr<const PointCloud> cloud) {
+  _window->setPointCloud(cloud);
+}
+
+void QtController::newClusters(
+    FrameNumber, std::shared_ptr<const std::vector<Cluster>> clusters) {
+  _window->setClusters(clusters);
+}
+
 } // namespace MouseTrack

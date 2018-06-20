@@ -33,6 +33,18 @@ void MainWindow::setFrameWindow(
     std::shared_ptr<const FrameWindow> frame_window) {
   _frame_window = frame_window;
   _ref_img_view->draw(frame_window);
+  _point_cloud = nullptr;
+  _clusters = nullptr;
+}
+
+void MainWindow::setPointCloud(std::shared_ptr<const PointCloud> point_cloud) {
+  _point_cloud = point_cloud;
+}
+
+void MainWindow::setClusters(
+    std::shared_ptr<const std::vector<Cluster>> clusters) {
+  _clusters = clusters;
+  // TODO: redraw
 }
 
 } // namespace MouseTrack

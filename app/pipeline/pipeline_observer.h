@@ -83,10 +83,16 @@ public:
     virtual void newFilteredFrameWindow(FrameNumber f, std::shared_ptr<const FrameWindow> window);
 
     virtual void startRegistration    (FrameNumber f);
+    /// called after registration step
     virtual void newRawPointCloud     (FrameNumber f, std::shared_ptr<const PointCloud> cloud);
   
     virtual void startPointCloudFiltering(FrameNumber f);
+
+    /// only called iff the point cloud passed through one or more filters
     virtual void newFilteredPointCloud(FrameNumber f, std::shared_ptr<const PointCloud> cloud);
+
+    /// Always called after last point cloud filter and before clustering step
+    virtual void newPointCloud(FrameNumber f, std::shared_ptr<const PointCloud> cloud);
 
     virtual void startClustering      (FrameNumber f);
     virtual void newClusters          (FrameNumber f, std::shared_ptr<const std::vector<Cluster>> clusters);
