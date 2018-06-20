@@ -13,7 +13,7 @@
 
 namespace MouseTrack {
 
-int QtController::main(int argc, char *argv[], op::variables_map &cli_options) {
+int QtController::main(int argc, char *argv[], op::variables_map &) {
 
   // set up application
   QApplication app(argc, argv);

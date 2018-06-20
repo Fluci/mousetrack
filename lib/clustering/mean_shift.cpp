@@ -5,8 +5,6 @@
 ///
 
 #include "mean_shift.h"
-#include "spatial/flann.h"
-#include "spatial/uniform_grid.h"
 #include <Eigen/Dense>
 #include <boost/log/trivial.hpp>
 #include <iostream>

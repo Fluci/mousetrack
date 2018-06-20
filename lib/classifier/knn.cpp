@@ -6,7 +6,6 @@
 #include "knn.h"
 
 #include "spatial/brute_force.h"
-#include "spatial/flann.h"
 
 namespace MouseTrack {
 

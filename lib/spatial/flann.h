@@ -3,7 +3,9 @@
 ///
 
 #pragma once
-
+#if !FLANN_FOUND
+    #error FLANN is not turned on, avoid inclusion of this file or enable FLANN
+#endif
 #include "spatial_oracle.h"
 #include <Eigen/Core>
 #include <boost/log/trivial.hpp>

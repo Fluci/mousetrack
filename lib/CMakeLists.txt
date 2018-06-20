@@ -43,6 +43,8 @@ set(source_files
         trajectory_builder/cog_trajectory_builder.cpp
         color/color.cpp
         )
+set(source_files_flann
+        "")
 
 # list here your testing files (*.test.cc) of your module
 set(test_files
@@ -60,8 +62,10 @@ set(test_files
         spatial/cubic_neighborhood.test.cc
         spatial/statistical_outlier_detection.test.cc
         spatial/uniform_grid.test.cc
-        spatial/flann.test.cc
         trajectory_builder/cog_trajectory_builder.test.cc
+        )
+set(test_files_flann
+        spatial/flann.test.cc
         )
 
 add_library(libmousetrack ${source_files})
@@ -78,7 +82,12 @@ find_package( Boost COMPONENTS
 
 ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 
-find_package( Flann REQUIRED )
+if(ENABLE_FLANN)
+    find_package( Flann REQUIRED )
+else(ENABLE_FLANN)
+    set(test_files_flann "")
+    set(source_files_flann "")
+endif(ENABLE_FLANN)
 
 find_package( OpenCV REQUIRED )
 
@@ -98,7 +107,7 @@ target_link_libraries(libmousetrack
     ${PNG_LIBRARIES}
     )
 
-add_executable(tests ${test_files})
+add_executable(tests ${test_files} ${test_files_flann})
 target_link_libraries(tests
     libmousetrack
     ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}

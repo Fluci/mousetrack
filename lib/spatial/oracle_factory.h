@@ -7,7 +7,11 @@
 #include "spatial_oracle.h"
 
 #include "brute_force.h"
+
+#if ENABLE_FLANN
 #include "flann.h"
+#endif
+
 #include "uniform_grid.h"
 
 #include <boost/log/trivial.hpp>
@@ -122,7 +126,7 @@ public:
     case Oracles::BRUTE_FORCE:
       return getBruteForce();
     case Oracles::FLANN:
-      return std::make_unique<Flann<Precision, Dim>>();
+      return getFlann();
     case Oracles::UNIFORM_GRID:
       BOOST_LOG_TRIVIAL(info) << "UniformGrid not supported for general "
                                  "request, falling back to BruteForce.";
@@ -153,7 +157,12 @@ private:
   }
   std::unique_ptr<Oracle> getFlann() const {
     BOOST_LOG_TRIVIAL(debug) << "creating Flann oracle";
+#if ENABLE_FLANN
     return std::make_unique<Flann<Precision, Dim>>();
+#else
+    BOOST_LOG_TRIVIAL(error) << "Flann oracle requested, but executable was compiled without support for flann. Falling back to brute force.";
+    return getBruteForce();
+#endif
   }
   std::unique_ptr<Oracle> getBruteForce() const {
     BOOST_LOG_TRIVIAL(debug) << "creating Brute force oracle";
