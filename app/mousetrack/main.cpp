@@ -1,11 +1,11 @@
-#include "cli_controller.h"
-#include "cli_options.h"
-#include "pipeline_factory.h"
-#include "pipeline_timer.h"
-#include "pipeline_writer.h"
+#include "cli/cli_controller.h"
+#include "cli/cli_options.h"
+#include "pipeline/pipeline_factory.h"
+#include "pipeline/pipeline_timer.h"
+#include "pipeline/pipeline_writer.h"
 
 #ifdef ENABLE_GUI
-#include "qt_controller.h"
+#include "gui/qt_controller.h"
 #endif
 
 #include <boost/log/expressions.hpp>

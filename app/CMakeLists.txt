@@ -7,35 +7,35 @@ set(CMAKE_AUTOMOC ON)
 
 # list here all source files appart from main
 set(source_files
-        cli_controller.cpp
-        cli_options.cpp
-        controller.cpp
-        matlab_reader.cpp
-        matlab_reader_concurrent.cpp
-        pipeline.cpp
-        pipeline_observer.cpp
-        pipeline_factory.cpp
-        pipeline_timer.cpp
-        pipeline_writer.cpp
-	)
+    cli/cli_controller.cpp
+    cli/cli_options.cpp
+    controller.cpp
+    pipeline/matlab_reader.cpp
+    pipeline/matlab_reader_concurrent.cpp
+    pipeline/pipeline.cpp
+    pipeline/pipeline_observer.cpp
+    pipeline/pipeline_factory.cpp
+    pipeline/pipeline_timer.cpp
+    pipeline/pipeline_writer.cpp
+    )
 
 # list here all source files related with the gui
 set(gui_source_files
-        qt_controller.cpp
-        main_window.cpp
-        gui_ref_img_view.cpp
-        )
+   gui/qt_controller.cpp
+   gui/main_window.cpp
+   gui/gui_ref_img_view.cpp
+   )
 
 # list here all source files related with reading ros bag files
 set(rosbag_source_files
-    ros_bag_reader.cpp
+    pipeline/ros_bag_reader.cpp
     )
 
 # list here your testing files (*.test.cc) of your module
 set(test_files
-        test_root.cc
-        matlab_reader.test.cc
-        )
+    test_root.cc
+    pipeline/matlab_reader.test.cc
+    )
 
 # find and import dependencies
 
@@ -101,7 +101,7 @@ target_link_libraries(libmousetrackAll
 )
 
 # create the mousetrack executable
-add_executable(mousetrack main.cpp ${gui_source_files})
+add_executable(mousetrack mousetrack/main.cpp ${gui_source_files})
 target_link_libraries(mousetrack
     libmousetrackAll
     ${GUI_LIBRARIES}

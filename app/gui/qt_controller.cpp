@@ -19,7 +19,8 @@ int QtController::main(int argc, char *argv[], op::variables_map &) {
 
   pipeline().addObserver(this);
 
-  _window.show();
+  _window = std::make_unique<MainWindow>();
+  _window->show();
   // start pipeline
   pipeline().start();
 
@@ -33,8 +34,8 @@ int QtController::main(int argc, char *argv[], op::variables_map &) {
 
 void QtController::newFrameWindow(FrameNumber f,
                                   std::shared_ptr<const FrameWindow> window) {
-  _window.setFrameNumber(f);
-  _window.setFrameWindow(window);
+  _window->setFrameNumber(f);
+  _window->setFrameWindow(window);
 }
 
 } // namespace MouseTrack

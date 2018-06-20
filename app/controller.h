@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "pipeline.h"
+#include "pipeline/pipeline.h"
 #include "types.h"
 
 namespace MouseTrack {
