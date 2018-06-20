@@ -84,6 +84,7 @@ ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 
 if(ENABLE_FLANN)
     find_package( Flann REQUIRED )
+    add_definitions(-DFLANN_FOUND)
 else(ENABLE_FLANN)
     set(test_files_flann "")
     set(source_files_flann "")
