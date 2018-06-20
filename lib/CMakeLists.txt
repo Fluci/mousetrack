@@ -81,6 +81,7 @@ find_package( Boost COMPONENTS
     REQUIRED )
 
 ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
+message("Boost version: " ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}  " (" ${Boost_VERSION} ")")
 
 if(ENABLE_FLANN)
     find_package( Flann REQUIRED )
