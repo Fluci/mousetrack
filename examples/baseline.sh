@@ -18,7 +18,7 @@ OUT=$2
 BG_SUB=${3-1}
 FRAMES="--first-frame=${4-0} --last-frame=${5-100000}"
 
-$APP -c -s $SRC -l trace --pipeline-timer -o $OUT ${FRAMES} \
+$APP -s $SRC -l trace --pipeline-timer -o $OUT ${FRAMES} \
 	--pipeline-frame-window-filtering=background-subtraction \
 	--background-subtraction-cage-directory=$SRC \
 	--background-subtraction-cage-frame=$BG_SUB \
