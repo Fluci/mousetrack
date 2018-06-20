@@ -8,19 +8,40 @@ This project will be awesome!
 
 TL;DR: Convenient one-liner for Ubuntu:
 ``` bash
-$ sudo apt install -y cmake libboost-all-dev libopencv-dev libeigen3-dev libpng16-dev libflann-dev
+$ sudo apt install -y cmake libboost-all-dev libopencv-dev libeigen3-dev libflann-dev librosbag-dev libsensor-msgs-dev libimage-transport-dev libyaml-cpp-dev libbz2-dev qt5-default
 ```
+
+There are some issues with libpng, depending on your machine configuration you might need to run ```$sudo apt install -y libpng16-dev``` or ```$ sudo apt install -y libpng-dev``` in addition.
+
 
 - CMake: `$ sudo apt install cmake`
 - Boost.Test: `$ sudo apt install libboost-all-dev`
 - [OpenCV](https://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html): `$ sudo apt install libopencv-dev`
 - Eigen: `$ sudo apt install libeigen3-dev`
+- We need to read PNG files: `$ sudo apt install libpng16-dev`
 - We need to read PNG files: `$ sudo apt install libpng16-dev` (comes with OpenCV)
+- QT: `$ sudo apt install qt5-default`
+- ROS bag support: `$ sudo apt install librosbag-dev libsensor-msgs-dev libimage-transport-dev libyaml-cpp-dev libbz2-dev`
 - We use FLANN for spatial queries: `$ sudo apt install libflann-dev` (comes with OpenCV)
 
 
 If operations run slow, you can try reinstalling OpenCV with these additional dependencies:
 - Atlas: `$ sudo apt-get install libatlas-base-dev gfortran`
+
+If you have trouble meeting some dependencies, there's always the option to turn off unused modules.
+Please see the root `CMakeLists.txt` for the corresponding flags (`ENABLE_GUI`, `ENABLE_ROSBAG`, etc.).
+
+#### Python dependencies
+
+You don't need these for the main application, but there is a folder with useful helper scripts (`scripts`) for post processing.
+
+Those need following dependencies:
+
+```bash
+$ pip3 install opencv-python plyfile matplotlib
+$ sudo apt install python3-tk
+
+```
 
 ### Version requirements
 
@@ -174,3 +195,28 @@ If everything succeeds, it will return an error code of 0.
 
 To add new tests, create a new file with the suffix `.test.cc` and add it to its corresponding `CMakeLists.txt` (either in `app/` or `lib/`).
 For the exact skeleton and available Macros, see an existing unit test or the [Boost.Test](http://www.boost.org/doc/libs/1_66_0/libs/test/doc/html/boost_test/testing_tools.html) documentation.
+
+
+## Examples
+
+In the folder `examples` you can find a bunch of bash scripts, demonstrating different pipeline configurations. Assuming you have a compiled executable of `mousetrack`, run the scripts in the same directory, for example in `build/app`, if you run CMake in `./build`.
+
+Each script takes a "minimum" of parameters, this means in the best case you only need to provide the input and output paths, while parameters are "hard-coded" in the bash script.
+
+Output is all written to the output directory. Note that a lot of data is written by default, this gives you the chance to inspect the in-between steps and get a feeling for what is happening.
+
+The scripts try to provide a starting point for further parameter tweaking as they already hold "reasonable" configurations.
+
+For further information, please see the comments inside each bash script.
+
+Here some scripts you might want to try to get started:
+
+- `raw_reconstruction.sh`: This script only takes an input and an output path. All it does is to reconstruct the entire 3D data. Use this to get an idea of your dataset in 3D.
+
+- `baseline.sh`:
+ This scripts assumes the first frame window of your data to be "empty", hence the object you want to observe is not visible in any camera view.
+ The baseline subtracts the background from each frame, hence you only find changes in the observed are.
+ Use this script, to get an idea of how something moves in a scene.
+
+- `hog_baseline.sh`:
+ One important feature is hog labeling, it allows you to perform some rudimentary pixel-wise labeling on the reference image. In addition to the input and output paths, you will also need a csv file holding HOG feature vectors for your subject. This script is useful if you intend to find, for example, body parts of an animal.

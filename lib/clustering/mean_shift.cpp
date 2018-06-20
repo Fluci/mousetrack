@@ -25,12 +25,12 @@ std::vector<Cluster> MeanShift::operator()(const PointCloud &cloud) const {
     return std::vector<Cluster>();
   }
 
-  const int dimensions = cloud[0].eigenVec().size();
+  const int dimensions = cloud.charDim();
 
   Oracle::PointList points;
   points.resize(dimensions, cloud.size());
   for (PointIndex i = 0; i < cloud.size(); i += 1) {
-    auto v = cloud[i].eigenVec();
+    auto v = cloud[i].characteristic();
     points.col(i) = v;
   }
 
@@ -91,7 +91,7 @@ MeanShift::convergePoints(const Oracle::PointList &points) const {
       // perform one iteration of mean shift
       prevCenter = currCenters[i];
       std::vector<PointIndex> locals =
-          oracle.find_in_range(currCenters[i], 2 * _window_size);
+          oracle.find_in_range(currCenters[i], 2 * _window_size)[0];
       if (locals.empty()) {
         BOOST_LOG_TRIVIAL(warning)
             << "No points in neighborhood, falling back to brute force.";

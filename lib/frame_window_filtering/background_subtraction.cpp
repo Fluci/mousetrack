@@ -24,8 +24,8 @@ FrameWindow BackgroundSubtraction::operator()(const FrameWindow &window) const {
   for (size_t i = 0; i < _cage_frame.frames().size(); i++) {
 
     // Copy the stuff we need from the FrameWindow objects
-    const Picture &cage_image = _cage_frame.frames()[i].referencePicture;
-    const Picture &mouse_image = window.frames()[i].referencePicture;
+    const PictureD &cage_image = _cage_frame.frames()[i].referencePicture;
+    const PictureD &mouse_image = window.frames()[i].referencePicture;
 
     // Dimensions must match
     if (!(cage_image.rows() == mouse_image.rows() &&
@@ -41,7 +41,7 @@ FrameWindow BackgroundSubtraction::operator()(const FrameWindow &window) const {
     }
 
     // Perform the subtraction
-    Picture sub = (mouse_image - cage_image).array().abs();
+    PictureD sub = (mouse_image - cage_image).array().abs();
 
     // Convert to opencv format and from [0,1] to [0,255] format
     cv::Mat subcv;
@@ -53,28 +53,23 @@ FrameWindow BackgroundSubtraction::operator()(const FrameWindow &window) const {
     cv::Mat maskcv;
     double thresh_otsu = cv::threshold(subcv, maskcv, 0, 255,
                                        cv::THRESH_BINARY + cv::THRESH_OTSU);
+    maskcv = subcv > (thresh_otsu * _otsu_factor);
 
     // Convert back to Eigen
     Eigen::MatrixXd mask;
+    maskcv = maskcv / 255;
     cv::cv2eigen(maskcv, mask);
-    mask = mask / 255;
-
     // A very low threshold means there's no significant bright
     // spots, i.e. no mouse => set mask to zeros
-    if (thresh_otsu < _threshold * 255) {
+    if (thresh_otsu < 0.01 * 255) {
       mask.setZero();
-      BOOST_LOG_TRIVIAL(debug)
-          << "No Mask stream " << i << " threshold: " << thresh_otsu;
     }
 
     // Build Frame object...
-    output.frames()[i].normalizedDisparityMap.zMap() =
-        mask.array() * output.frames()[i].normalizedDisparityMap.zMap().array();
-    output.frames()[i].rawDisparityMap.zMap() =
-        mask.array() * output.frames()[i].rawDisparityMap.zMap().array();
-    output.frames()[i].referencePicture =
-        mask.array() * output.frames()[i].referencePicture.array();
+    output.frames()[i].normalizedDisparityMap =
+        mask.array() * output.frames()[i].normalizedDisparityMap.array();
   }
+
   return output;
 }
 
@@ -87,9 +82,9 @@ void BackgroundSubtraction::cage_frame(FrameWindow &cage_frame) {
   _cage_frame = cage_frame;
 }
 
-double BackgroundSubtraction::threshold() const { return _threshold; }
-void BackgroundSubtraction::threshold(double threshold) {
-  _threshold = threshold;
+double BackgroundSubtraction::otsu_factor() const { return _otsu_factor; }
+void BackgroundSubtraction::otsu_factor(double otsu_factor) {
+  _otsu_factor = otsu_factor;
 }
 
 } // namespace MouseTrack
