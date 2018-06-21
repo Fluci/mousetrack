@@ -15,13 +15,16 @@ namespace MouseTrack {
 
 GUIRefImgView::GUIRefImgView(QWidget *parent) : QWidget(parent) {
 
-  setFixedSize(752, 480);
+  setFixedSize(2 * 752, 2 * 480);
   _gridGroupBox = new QGroupBox(this);
   for (size_t i = _images.size(); i < 4; ++i) {
     _images.push_back(new QLabel(this));
   }
   _gridLayout = new QGridLayout;
   _gridGroupBox->setLayout(_gridLayout);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  mainLayout->addWidget(_gridGroupBox);
+  setLayout(mainLayout);
 }
 
 QImage toQImage(const PictureDRGB &pic) {
@@ -77,6 +80,7 @@ void GUIRefImgView::draw(const std::vector<PictureDRGB> &frames) {
 
 void GUIRefImgView::draw(const std::vector<QImage> &images) {
   if (_images.size() != images.size()) {
+    // wont work -> other thread
     BOOST_LOG_TRIVIAL(debug) << "Adjusting image count to " << images.size();
     for (size_t i = _images.size(); i < images.size(); ++i) {
       _images.push_back(new QLabel(this));
@@ -85,7 +89,7 @@ void GUIRefImgView::draw(const std::vector<QImage> &images) {
   }
 
   for (size_t i = 0; i < images.size(); ++i) {
-    const auto &image = images[i];
+    auto &image = images[i];
     _images[i]->setFixedSize(image.width(), image.height());
     _images[i]->setPixmap(QPixmap::fromImage(std::move(image)));
   }
