@@ -40,4 +40,16 @@ typedef Eigen::Matrix<unsigned char, Eigen::Dynamic, Eigen::Dynamic,
                       Eigen::RowMajor>
     PictureI;
 
+struct PictureDRGB {
+  PictureD r;
+  PictureD g;
+  PictureD b;
+};
+
+struct PictureIRGB {
+  PictureI r;
+  PictureI g;
+  PictureI b;
+};
+
 } // namespace MouseTrack

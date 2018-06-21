@@ -4,6 +4,8 @@
 ///
 
 #pragma once
+#include <QGridLayout>
+#include <QGroupBox>
 #include <QLabel>
 #include <QWidget>
 
@@ -17,10 +19,14 @@ class GUIRefImgView : public QWidget {
   Q_OBJECT
 public:
   explicit GUIRefImgView(QWidget *parent);
-  void draw(std::shared_ptr<const FrameWindow> f);
+  void draw(const std::vector<PictureD> &frames);
+  void draw(const std::vector<PictureDRGB> &frames);
+  void draw(const std::vector<QImage> &image);
 
 private:
-  QLabel *_image;
+  std::vector<QLabel *> _images;
+  QGroupBox *_gridGroupBox;
+  QGridLayout *_gridLayout;
 };
 
 } // namespace MouseTrack
